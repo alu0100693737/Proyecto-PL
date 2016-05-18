@@ -1,0 +1,62 @@
+th, td      {
+               vertical-align: top;
+               padding: 25px;
+               text-align: right;
+               font-size:large;
+               font-weight: normal;
+               text-transform: uppercase;
+               font-family: "Tw Cen MT", cursive;
+               background-color: rgba(255, 255, 255, 0.7);
+
+            }     /* Don't center table cells  */
+#converted  { color: black; text-transform: uppercase;
+font-family: "Tw Cen MT", cursive;font-weight: bold; font-size:large;          }     /* Calculated values in bold */
+input       {
+              text-align: right;       /* Align input to the right  */
+              border: none;
+              border-radius: 20px 20px 20px 20px;
+              padding: 5px  5px;
+              font-size:large;       }
+body
+{
+ background-color: black;
+ background-image: url("fondotests.jpg");
+background-size: 100%;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+ font-family: "	Tw Cen MT";
+}
+
+h1:hover {
+  color: #green;
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+    text-transform: uppercase;
+    font-family: "Tw Cen MT", cursive;
+    padding: 5px 15px;
+    color: black;
+    display:inline-block;
+    border-radius: 10px 10px 10px 10px;
+}
+
+
+  #perfil{
+
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 50px;
+  }
+
+  h2:hover{
+    color: #fff;
+    position: relative;
+  }
