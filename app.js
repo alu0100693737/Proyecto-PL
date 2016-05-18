@@ -12,6 +12,7 @@ var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
+app.use(express.static(__dirname + '/public'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -46,7 +47,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+/*if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
@@ -54,8 +55,8 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
-}
-
+}*/
+/*
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
@@ -64,7 +65,7 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
-});
+});*/
 
 
 module.exports = app;
