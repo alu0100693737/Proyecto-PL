@@ -39,7 +39,7 @@ $backgroundcolor:  #DA9797;
 $colorNegro: #000000;
 $colorBlanco: #eee;
 $colorVerde: rgba(0, 164, 42, 0.8);
-$colorHover: #F4FA58;
+$colorHover: #BDBDBD;
 $colorFondo:   rgba(23, 86, 202, 0.3);
 
 input        { @include position(right, $top: 1em, $left: 30%); }
@@ -51,18 +51,35 @@ table        {
 
 #finaltable:hover td { background-color: $colorHover; }
 tr:nth-child(odd)    {
-  background-color:$colorBlanco; }
+  background-color: rgba(234, 111, 44, 0.5); }
 tr:nth-child(even)    { background-color:$colorVerde }
 tr.error       { background-color: red;}
 
 html {
   @include centerer;
   @include cover-background('images/fondo.jpg');
+  font-weight: bold;
+}
+
+label {
+  font-size: 25px;
+  padding-left: 5%;
+}
+
+#footer {
+  border-color: $colorFondo;
+  background-color: $colorBlanco;
+  padding: 2%;
+  font-weight: bold;
+  font-style: oblique;
 }
 
 #fondo_tabla {
   background-color: $colorFondo;
   padding: 5%;
+  font-weight: bold;
+  font-style: oblique;
+  @include btn-theme();
 }
 
 #result      {
@@ -76,7 +93,6 @@ html {
   padding: 5px;
   font-style: italic;
   background-color: $colorBlanco;
-
 }
 
 .boton {
@@ -84,7 +100,6 @@ html {
 }
 
 h1 {
-    
     @include font-size(2);
     margin: 4%;
     text-align: center;

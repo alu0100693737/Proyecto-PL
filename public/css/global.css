@@ -12,10 +12,10 @@ table {
   border-color: #eee; }
 
 #finaltable:hover td {
-  background-color: #F4FA58; }
+  background-color: #BDBDBD; }
 
 tr:nth-child(odd) {
-  background-color: #eee; }
+  background-color: rgba(234, 111, 44, 0.5); }
 
 tr:nth-child(even) {
   background-color: rgba(0, 164, 42, 0.8); }
@@ -31,11 +31,30 @@ html {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover; }
+  background-size: cover;
+  font-weight: bold; }
+
+label {
+  font-size: 25px;
+  padding-left: 5%; }
+
+#footer {
+  border-color: rgba(23, 86, 202, 0.3);
+  background-color: #eee;
+  padding: 2%;
+  font-weight: bold;
+  font-style: oblique; }
 
 #fondo_tabla {
   background-color: rgba(23, 86, 202, 0.3);
-  padding: 5%; }
+  padding: 5%;
+  font-weight: bold;
+  font-style: oblique;
+  padding: 15px 32px;
+  background-color: #BDBDBD;
+  border-color: #743EA5; }
+  #fondo_tabla:hover {
+    background-color: #eee; }
 
 #result {
   position: top;
@@ -55,7 +74,7 @@ html {
 
 .boton {
   padding: 15px 32px;
-  background-color: #F4FA58;
+  background-color: #BDBDBD;
   border-color: #743EA5; }
   .boton:hover {
     background-color: #eee; }
