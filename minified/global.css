@@ -1,0 +1,20 @@
+#result,table{font-size:20px}
+#footer,textarea{border-color:rgba(23,86,202,.3)}
+#fondo_tabla,#footer{font-weight:700;font-style:oblique}
+#header,input{top:1em;left:30%}
+input{position:right}
+table{font-size:2rem;border-color:#eee}
+#finaltable:hover td{background-color:#BDBDBD}
+tr:nth-child(odd){background-color:rgba(234,111,44,.5)}
+tr:nth-child(even){background-color:rgba(0,164,42,.8)}
+tr.error{background-color:red}
+#fondo_tabla:hover,#footer,#header{background-color:#eee}
+html{position:absolute;top:20%;left:5%;background:url(images/fondo.jpg) center center no-repeat fixed;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;font-weight:700}
+label{font-size:25px;padding-left:5%}
+#footer{padding:2%}
+#fondo_tabla{padding:15px 32px;background-color:#BDBDBD;border-color:#743EA5}
+#result{position:top;top:1em;left:50%;border-color:red;font-size:2rem}
+#header{position:top;padding:5px;font-style:italic}
+.boton{padding:15px 32px;background-color:#BDBDBD;border-color:#743EA5}
+.boton:hover,h1{background-color:#eee}
+h1{font-size:20px;font-size:2rem;margin:4%;text-align:center;padding:1%;color:#000}
