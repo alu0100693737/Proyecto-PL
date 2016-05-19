@@ -1,4 +1,5 @@
-
+(() => {
+"use strict"; // Use ECMAScript 5 strict mode in browsers that support it
 /* Volcar en la textarea de entrada
  * #original el contenido del fichero fileName */
 const dump = (fileName) => {
