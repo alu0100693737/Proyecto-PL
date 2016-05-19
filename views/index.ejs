@@ -1,17 +1,29 @@
+<tr>
+  <td> <a href="http://campusvirtual.ull.es/1314/course/view.php?id=1104"  title="PL-UDV">PL-UDV</a> </td> &nbsp;
+  <td> <a href="https://github.com/crguezl/pegjscalc"  title="Repo">Repo</a> </td> &nbsp;
+  <td> <a href="http://en.wikipedia.org/wiki/Recursive_descent_parser#Example_parser"   title="Wikipedia">PL0</a> </td> &nbsp;
+  <td> <a href="http://pegjs.majda.cz/"  title="PEG.js">PEG.js</a> </td> &nbsp;
+  <td> <a href="http://datamapper.org/"  title="DataMapper">DataMapper</a> </td> &nbsp;
+  <td> <a href="http://sass-lang.com/"  title="Sass">Sass</a> </td> &nbsp;
+  <td> <a href="http://crguezl.github.io/pl-html/"  title="PLGH">PL-GH</a> </td> &nbsp;
+  <td> <a href="http://docs.mathjax.org/en/latest/start.html"  title="MathJax">MathJax</a> </td> &nbsp;
+  <td> <a href="https://plus.google.com/u/0/+CasianoRodriguezLeon/" title="crguezl">crguezl</a> </td>
+</tr>
+
 <h1>Analizador de PL0 ampliado usando PEG.js</h1>
 <div id="content">
-  <p class="loadfile">
+  <p class="original">
     <input type="file" id="examples" />
   </p>
   <p>
-  <nav>
-
-  </nav>
   <table>
     <tr>
       <td>
         <form action="/save" method="post">
-          
+          <textarea id="original" name="original"
+                             autofocus cols = "40" rows = "4">
+
+            </textarea>
           <br/>
           <label for="saveas">Save as</label>
           <input id="saveas" type="text" name="fname"
@@ -22,11 +34,11 @@
     </tr>
   </table>
   </p>
-  <div class="output">
+  <div class="salida">
     <pre>
-<span id="output"></span> <!-- Output goes here! -->
+<span id="salida"></span> <!-- Output goes here! -->
     </pre>
   </div>
 </div>
 
-<script src="pl0.js"></script>
+<script src="js/pl0.js"></script>
