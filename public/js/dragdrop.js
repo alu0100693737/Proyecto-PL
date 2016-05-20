@@ -60,6 +60,8 @@ $(document).ready(() => {
     let dropZone = $('.drop_zone')[0];
     dropZone.addEventListener('dragover', handleDragOver, false);
     dropZone.addEventListener('drop', handleDragFileSelect, false);
+
+    //Cargar fichero
     let inputFile = $('.inputfile')[0];
     inputFile.addEventListener('change', handleFileSelect, false);
  });

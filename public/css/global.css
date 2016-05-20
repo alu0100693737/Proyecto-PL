@@ -12,7 +12,13 @@ table {
   border-color: #eee; }
 
 #finaltable td {
-  background-color: #BDBDBD; }
+  background-color: #BDBDBD;
+  padding: 20px;
+  border: 20px; }
+
+/*problemas mostrando boton*/
+button.hidden {
+  display: none; }
 
 tr:nth-child(odd) {
   background-color: rgba(215, 143, 44, 0.6); }
@@ -74,6 +80,9 @@ label {
   padding: 5px;
   font-style: italic;
   background-color: #eee; }
+
+textarea {
+  resize: none; }
 
 .boton {
   padding: 15px 32px;

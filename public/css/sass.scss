@@ -50,7 +50,16 @@ table        {
   border-color: $colorBlanco;
 }
 
-#finaltable td { background-color: $colorHover; }
+#finaltable td { background-color: $colorHover;
+   padding: 20px;
+   border: 20px;
+}
+
+/*problemas mostrando boton*/
+button.hidden {
+  display: none;
+}
+
 tr:nth-child(odd)    {
   background-color: rgba(215, 143, 44, 0.6); }
 tr:nth-child(even)    { background-color:$colorVerde }
@@ -98,6 +107,10 @@ label {
   padding: 5px;
   font-style: italic;
   background-color: $colorBlanco;
+}
+
+textarea {
+  resize: none;
 }
 
 .boton {
