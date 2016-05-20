@@ -21,7 +21,7 @@
 
 @mixin centerer {
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 22%;
 }
 
@@ -55,6 +55,31 @@ table        {
    border: 20px;
 }
 
+@mixin tabs ($background: blue, $color: yellow) {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: $backgroundcolor;
+    overflow: hidden;
+  }
+  li {
+    float: left;
+  }
+  a {
+    text-decoration: none;
+    display: block;
+    padding: 8px;
+    &:hover {
+      background: darken($background, 20%);
+    }
+  }
+}
+
+nav {
+  @include tabs ($background: rgba(255,255,0,0.3), $color: $colorBlanco);
+  font-weight: bold;
+}
 /*problemas mostrando boton*/
 button.hidden {
   display: none;
