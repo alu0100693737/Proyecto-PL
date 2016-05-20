@@ -9,14 +9,23 @@
     <tr>
       <td>
         <form action="/save" method="post">
-          <textarea id="original" name="original"
-                             autofocus cols = "80" rows = "7">
-
+           <textarea class = "drop_zone" autofocus="" cols = "80" rows = "10" id="original"></textarea>
             </textarea>
           <br/>
-          <label for="saveas">Save as</label> &nbsp;
-          <input id="saveas" type="text" name="fname"
-                 title="name" pattern="\w+" />
+          <br>
+            <div class="example">
+              Click para cargar ejemplos:
+              <button class ="example" type="button"></button>
+              <button class ="example" type="button"></button>
+              <button class ="example" type="button"></button>
+              <button class ="example" type="button">hola</button>
+            </div>
+            <br>
+            Guardar entrada:
+            <form>
+              <input id="titulo" type="text" pattern="^[a-zA-Z_]\w*\.csv$">
+              <input id="guardar" type="submit">
+            </form>
         </form>
       </td>
       <td><button id="parse" class="boton" type="button">parse</button></td>
@@ -33,4 +42,4 @@
   Iván García Campos &nbsp; &nbsp; Procesadores de Lenguaje
 </div>
 
-<script src="js/pl0.js"></script>
+<script src="js/dragdrop.js"></script>

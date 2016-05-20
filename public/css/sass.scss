@@ -21,8 +21,8 @@
 
 @mixin centerer {
   position: absolute;
-  top: 20%;
-  left: 5%;
+  top: 15%;
+  left: 22%;
 }
 
 @mixin btn-theme {
@@ -42,16 +42,17 @@ $colorVerde: rgba(0, 164, 42, 0.8);
 $colorHover: #BDBDBD;
 $colorFondo:   rgba(23, 86, 202, 0.3);
 
+
 input        { @include position(right, $top: 1em, $left: 30%); }
 textarea     { border-color: $colorFondo; }
 table        {
-  @include font-size(2);
+  @include font-size(1);
   border-color: $colorBlanco;
 }
 
-#finaltable:hover td { background-color: $colorHover; }
+#finaltable td { background-color: $colorHover; }
 tr:nth-child(odd)    {
-  background-color: rgba(234, 111, 44, 0.5); }
+  background-color: rgba(215, 143, 44, 0.6); }
 tr:nth-child(even)    { background-color:$colorVerde }
 tr.error       { background-color: red;}
 
@@ -59,6 +60,10 @@ html {
   @include centerer;
   @include cover-background('images/fondo.jpg');
   font-weight: bold;
+}
+
+.examples {
+  font-size: 15px;
 }
 
 label {
@@ -106,4 +111,8 @@ h1 {
     padding:1%;
     color: $colorNegro;
     background-color: $colorBlanco;
+}
+
+h1:hover {
+  background-color: $backgroundcolor;
 }

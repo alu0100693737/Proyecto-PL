@@ -7,15 +7,15 @@ textarea {
   border-color: rgba(23, 86, 202, 0.3); }
 
 table {
-  font-size: 20px;
-  font-size: 2rem;
+  font-size: 10px;
+  font-size: 1rem;
   border-color: #eee; }
 
-#finaltable:hover td {
+#finaltable td {
   background-color: #BDBDBD; }
 
 tr:nth-child(odd) {
-  background-color: rgba(234, 111, 44, 0.5); }
+  background-color: rgba(215, 143, 44, 0.6); }
 
 tr:nth-child(even) {
   background-color: rgba(0, 164, 42, 0.8); }
@@ -25,14 +25,17 @@ tr.error {
 
 html {
   position: absolute;
-  top: 20%;
-  left: 5%;
+  top: 15%;
+  left: 22%;
   background: url("images/fondo.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   font-weight: bold; }
+
+.examples {
+  font-size: 15px; }
 
 label {
   font-size: 25px;
@@ -87,5 +90,8 @@ h1 {
   padding: 1%;
   color: #000000;
   background-color: #eee; }
+
+h1:hover {
+  background-color: #DA9797; }
 
 /*# sourceMappingURL=global.css.map */
