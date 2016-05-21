@@ -6,6 +6,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
+const PEG = require('./public/js/pl0');
 
 const app = express();
 
@@ -19,6 +20,25 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', (request, response) => {
   response.render('index', { title: 'Proyecto' });
+});
+
+app.get('/grammar', (request, response) => {
+  response.render('grammar', { title: 'Proyecto' });
+});
+
+app.get('/arbol', (request, response) => {
+    var tree;
+    try {
+        tree = PEG.parse(request.query.input);
+        if (tree.errors)
+            tree = tree.errors;
+    } catch (e) {
+        console.log("ERROR: " + e);
+        tree = "Syntax Error: " + e.message.substring(0, e.message.length - 1) + " in line " + e.location.start.line;
+    }
+    response.send({
+        "tree": tree
+    });
 });
 
 const Entrada = require('./models/db');

@@ -2,11 +2,17 @@
 "use strict"; // Use ECMAScript 5 strict mode in browsers that support it
 /* Volcar en la textarea de entrada
  * #original el contenido del fichero fileName */
+ //mongo
 const dump = (fileName) => {
   $.get(fileName, function (data) {
       $("#original").val(data);
   });
 };
+
+/* Volcar la tabla con el resultado en el HTML */
+const resultado = (data) => {
+        $("#salida").html(JSON.stringify(data.tree, null, 2));
+    };
 
 //File
 const handleFileSelect = (evt) => {
@@ -43,12 +49,22 @@ const handleDragOver = (evt) => {
 }
 
 //localstorage, inicializacion de ruta botones,
-//añadidos eventos drap and drop
 $(document).ready(() => {
     let original = document.getElementById("original");
     if (window.localStorage && localStorage.original) {
       original.value = localStorage.original;
     }
+
+    //Tabla
+    $("#parse").click(() => {
+           if (window.localStorage) localStorage.original = original.value;
+           $.get("/arbol", {
+                   input: original.value
+               },
+               resultado,
+               'json'
+           );
+       });
 
    /* botones para rellenar el textarea */
    $('button.example').each( (_,y) => {

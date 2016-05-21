@@ -113,6 +113,11 @@ label {
   font-style: oblique;
 }
 
+#salida {
+  background-color: $colorBlanco;
+  border-color: $colorFondo;
+  padding: 2%;
+}
 #fondo_tabla {
   background-color: $colorFondo;
   padding: 5%;

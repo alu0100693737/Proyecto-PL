@@ -1,6 +1,6 @@
 /*
- * PEGjs for a "Pl-0" like language
- * Used in ULL PL Grado de Informática classes
+ * Classic example grammar, which recognizes simple arithmetic expressions like
+ * "2*(3+4)". The parser generated from this grammar then AST.
  */
 
 {
@@ -20,18 +20,9 @@
   }
 }
 
-st     = CL s1:st? r:(SC st)* SC* CR {
-               console.log(s1);
-               console.log(r);
-               console.log(location()) /* atributos start y end */
-               let t = [];
-               if (s1) t.push(s1);
-               return {
-                 type: 'COMPOUND', // Chrome supports destructuring
-                 children: t.concat(r.map( ([_, st]) => st ))
-               };
-            }
-       / IF e:assign THEN st:st ELSE sf:st
+st     = i:ID ASSIGN e:exp
+            { return {type: '=', left: i, right: e}; }
+       / IF e:exp THEN st:st ELSE sf:st
            {
              return {
                type: 'IFELSE',
@@ -40,7 +31,7 @@ st     = CL s1:st? r:(SC st)* SC* CR {
                sf: sf,
              };
            }
-       / IF e:assign THEN st:st
+       / IF e:exp THEN st:st
            {
              return {
                type: 'IF',
@@ -48,38 +39,12 @@ st     = CL s1:st? r:(SC st)* SC* CR {
                st: st
              };
            }
-
-      / WHILE e:assign DO st:st CR
-        {
-            return {
-              type: 'WHILE',
-              c: e,
-              st: st
-            };
-        }
-
-      / RETURN e:exp CR
-        {
-            return {
-              type: "RETURN",
-            };
-        }
-
-      / assign
-
-assign = i:ID ASSIGN e:cond
-            { return {type: '=', left: i, right: e}; }
-       / cond
-
-cond = l:exp op:COMP r:exp { return { type: op, left: l, right: r} }
-     / exp
-
 exp    = t:term   r:(ADD term)*   { return tree(t,r); }
 term   = f:factor r:(MUL factor)* { return tree(f,r); }
 
 factor = NUMBER
        / ID
-       / LEFTPAR t:assign RIGHTPAR   { return t; }
+       / LEFTPAR t:exp RIGHTPAR   { return t; }
 
 _ = $[ \t\n\r]*
 
@@ -88,15 +53,6 @@ ADD      = _ op:[+-] _ { return op; }
 MUL      = _ op:[*/] _ { return op; }
 LEFTPAR  = _"("_
 RIGHTPAR = _")"_
-CL       = _"{"_
-CR       = _"}"_
-SC       = _";"+_
-COMP     = _ op:("=="/"!="/"<="/">="/"<"/">") _ {
-               return op;
-            }
-WHILE    = _"while" _
-DO       = _"do" _
-RETURN = _"return" _
 IF       = _ "if" _
 THEN     = _ "then" _
 ELSE     = _ "else" _

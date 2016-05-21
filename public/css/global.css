@@ -71,6 +71,11 @@ label {
   font-weight: bold;
   font-style: oblique; }
 
+#salida {
+  background-color: #eee;
+  border-color: rgba(23, 86, 202, 0.3);
+  padding: 2%; }
+
 #fondo_tabla {
   background-color: rgba(23, 86, 202, 0.3);
   padding: 5%;
