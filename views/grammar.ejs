@@ -1,29 +1,23 @@
-<script type="text/javascript" src="path-to-mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-</script>
-<script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
-<br>
+<div id="grammar">
+  <br><br>
 Recuerde que un PEG $G$ es una cuaterna $G =(\Sigma,V,P,S)$.
 <ol>
-  <li>$\Sigma$ es el conjunto de terminales.
-  <li>$V$ es un conjunto (disjunto de $\Sigma$) que se denomina conjunto de
+  <li>$\Sigma$ es el conjunto de terminales. <br> <br>
+  <li>$V$ es un conjunto (disjunto de $\Sigma$) que se denomina conjunto de <br>
       <i>símbolos no terminales</i>,
-      <i>variables sintácticas</i> o <i>categorías gramáticales</i>,
-  <li>$P$ es un conjunto de pares de $V \times (V \cup \Sigma )^*$. En vez de escribir
-  un par usando la notación $(A, \alpha) \in P$ se escribe $A \leftarrow \alpha$.
-  Un elemento de $P$ se denomina <i>regla de análisis</i>.
-  <li>Por último, $S$ es un símbolo del conjunto
-  $V$ que se denomina <i>expresión de arranque</i>.
+      <i>variables sintácticas</i> o <i>categorías gramáticales</i>, <br> <br>
+  <li>$P$ es un conjunto de pares de $V \times (V \cup \Sigma )^*$. En vez de escribir <br>
+  un par usando la notación $(A, \alpha) \in P$ se escribe $A \leftarrow \alpha$. <br>
+  Un elemento de $P$ se denomina <i>regla de análisis</i>. <br> <br>
+  <li>Por último, $S$ es un símbolo del conjunto <br>
+  $V$ que se denomina <i>expresión de arranque</i>. <br>
 </ol>
 <ol>
-  <li> $\Sigma = \{ if, then, else, =, +, -, *, /, (, ), 0 \ldots 9 \}$,
+  <li> $\Sigma = \{ if, then, else, =, +, -, *, /, (, ), 0 \ldots 9 \}$, <br> <br>
   <li> $V = \{ st, exp, term, factor \} \cup$ <br />
   $\{ASSIGN, ADD, MUL, LEFTPAR, RIGHTPAR \} \cup$ <br />
-  $\{IF, THEN, ELSE, ID, NUMBER, \_ \}$
+  $\{IF, THEN, ELSE, ID, NUMBER, \_ \}$ <br> <br>
   <li> Reglas de Análisis:
   <ol>
 <pre>
@@ -54,5 +48,4 @@ NUMBER   = _ [0-9]+ _
   <li> Expresión de arranque: $st$
 </ol>
 <BR>
-<BR>
-<BR>
+</div>

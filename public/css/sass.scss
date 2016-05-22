@@ -91,9 +91,12 @@ tr:nth-child(even)    { background-color:$colorVerde }
 tr.error       { background-color: red;}
 
 html {
-  @include centerer;
   @include cover-background('images/fondo.jpg');
   font-weight: bold;
+}
+
+#index {
+  @include centerer;
 }
 
 .examples {
@@ -118,6 +121,7 @@ label {
   border-color: $colorFondo;
   padding: 2%;
 }
+
 #fondo_tabla {
   background-color: $colorFondo;
   padding: 5%;
@@ -145,6 +149,14 @@ textarea {
 
 .boton {
    @include btn-theme();
+}
+
+#grammar {
+  padding: 10px;
+  margin-left: 20%;
+  margin-top: 5%;
+  margin-right: 25%;
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 h1 {

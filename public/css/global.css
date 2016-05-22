@@ -47,15 +47,17 @@ tr.error {
   background-color: red; }
 
 html {
-  position: absolute;
-  top: 10%;
-  left: 22%;
   background: url("images/fondo.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   font-weight: bold; }
+
+#index {
+  position: absolute;
+  top: 10%;
+  left: 22%; }
 
 .examples {
   font-size: 15px; }
@@ -112,6 +114,13 @@ textarea {
   border-color: #743EA5; }
   .boton:hover {
     background-color: #eee; }
+
+#grammar {
+  padding: 10px;
+  margin-left: 20%;
+  margin-top: 5%;
+  margin-right: 25%;
+  background-color: rgba(255, 255, 255, 0.4); }
 
 h1 {
   font-size: 20px;
