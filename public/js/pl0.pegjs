@@ -67,6 +67,7 @@ functionDeclaration = FUNCTION id:ID LEFTPAR !COMMA p1:ID? r:(COMMA ID)* RIGHTPA
 }
 
 st
+
   = CL s1:st? r:(SC st)* SC* CR {
   //console.log(location()) /* atributos start y end */
   let t = [];
@@ -77,6 +78,14 @@ st
        children: t.concat(r.map( ([_, st]) => st ))
      };
   }
+
+  / comentarios
+    comentarios
+     = cm:COMMENTS {
+      return {
+        type: 'COMENTARIO'
+      }
+     }
 
   / IF e:assign THEN st:st ELSE sf:st {
       return {
@@ -178,7 +187,6 @@ st
   }
 
 _ = $[ \t\n\r]*
-COMMENTS = _ op:_"\\" ([a-zA-Z_][a-zA-Z_0-9]*) _ { return "COMMENTS"; }       /* aun no implementado */
 ASSIGN   = _ op:'=' _  { return op; }
 INCREMENTO = op:("++"/"--") _ {  return op; }         /* aun no implementado */
 ADD      = _ op:[+-] _ { return op; }
@@ -191,7 +199,7 @@ SC       = _";"_
 COMMA    = _","_
 AND      = _"&&"_                           /* aun no implementado */
 OR       = _"||"_                           /* aun no implementado */
-COMILLAS   = _'"'_                            /* aun no implementado */
+COMILLAS   = _'"'_
 COMP     = _ op:("=="/"!="/"<="/">="/"<"/">") _ {
                return op;
             }
@@ -207,7 +215,8 @@ RETURN   = _ "return" _
 VAR      = _ "var" _
 CONST    = _ "const" _
 FUNCTION = _ "function" _
-STRING   = _ str:([a-zA-Z0-9_ ]*)_ { return str; }
+STRING   = _ str:([a-zA-Z0-9_ ]*)_ { return str.join(""); } /* [h, o, l, a] */
+COMMENTS = _ cm:$('\\'([a-zA-Z_][a-zA-Z_0-9]*)_) { return "COMMENTS"; }       /* aun no implementado */
 ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _
             {
               return { type: 'ID', value: id };
