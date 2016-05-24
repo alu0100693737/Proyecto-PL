@@ -31,7 +31,16 @@ program
   }
 
 block
-  = cD:constantDeclaration? vD:varDeclaration? fD:functionDeclaration* st:st {
+  = c:comentario?
+    comentario
+    = COMMENTS* {
+      return {
+        type: 'COMENTARIO',
+        value: value
+        }
+        }
+
+  / cD:constantDeclaration? vD:varDeclaration? fD:functionDeclaration* st:st {
     let constants = cD? cD : [];
     let variables = vD? vD : [];
     return {
@@ -66,9 +75,17 @@ functionDeclaration = FUNCTION id:ID LEFTPAR !COMMA p1:ID? r:(COMMA ID)* RIGHTPA
   }, b);
 }
 
+/* comentarios
+   = cm:COMMENTS {
+    return {
+      type: 'COMENTARIO'
+    }
+   } */
+
 st
 
-  = CL s1:st? r:(SC st)* SC* CR {
+
+= CL s1:st? r:(SC st)* SC* CR {
   //console.log(location()) /* atributos start y end */
   let t = [];
   if (s1)
@@ -78,14 +95,6 @@ st
        children: t.concat(r.map( ([_, st]) => st ))
      };
   }
-
-  / comentarios
-    comentarios
-     = cm:COMMENTS {
-      return {
-        type: 'COMENTARIO'
-      }
-     }
 
   / IF e:assign THEN st:st ELSE sf:st {
       return {
@@ -216,7 +225,7 @@ VAR      = _ "var" _
 CONST    = _ "const" _
 FUNCTION = _ "function" _
 STRING   = _ str:([a-zA-Z0-9_ ]*)_ { return str.join(""); } /* [h, o, l, a] */
-COMMENTS = _ cm:$('\\'([a-zA-Z_][a-zA-Z_0-9]*)_) { return "COMMENTS"; }       /* aun no implementado */
+COMMENTS = _ '\\'str:([ a-zA-Z0-9]*)_  { return type: 'COMENTARIO', value: str.join(""); }
 ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _
             {
               return { type: 'ID', value: id };
