@@ -45,7 +45,7 @@ block
   }
 
 comentarios
- = COMMENT id:ID?
+ = cm:COMENTARIO
 
 constantDeclaration
   = CONST id:ID ASSIGN n:NUMBER rest:(COMMA ID ASSIGN NUMBER)* SC {
@@ -70,15 +70,7 @@ functionDeclaration = FUNCTION id:ID LEFTPAR !COMMA p1:ID? r:(COMMA ID)* RIGHTPA
   }, b);
 }
 
-/* comentarios
-   = cm:COMMENTS {
-    return {
-      type: 'COMENTARIO'
-    }
-   } */
-
 st
-
 
 = CL s1:st? r:(SC st)* SC* CR {
   //console.log(location()) /* atributos start y end */
@@ -115,6 +107,16 @@ st
         st: st
       };
   }
+
+  / FOR LEFTPAR i:assign SC cn:cond SC inc:st RIGHTPAR s:st {
+      return {
+          type: 'FOR',
+          index: i.left,
+          cond: cn.type,
+          increment: inc,
+          children: s
+      };
+    }
 
   / RETURN a:assign? {
       return {
@@ -210,7 +212,7 @@ COMP     = _ op:("=="/"!="/"<="/">="/"<"/">") _ {
 IF       = _ "if" _
 THEN     = _ "then" _
 ELSE     = _ "else" _
-FOR      = _ "for" _                        /* aun no implementado */
+FOR      = _ "for" _
 WHILE    = _ "while" _
 DO       = _ "do" _
 SWITCH   = _ "switch" _
@@ -220,14 +222,19 @@ VAR      = _ "var" _
 CONST    = _ "const" _
 FUNCTION = _ "function" _
 STRING   = _ str:([a-zA-Z0-9_ ]*)_ { return str.join(""); } /* [h, o, l, a] */
-COMMENT = _ id:$"\\" _ {
-  return { type: 'COMENTARIO', value: id };
-}
+COMMENT = _ id:$"\\" _
+COMENTARIO = _ '\\'cm:([a-zA-Z_0-9]*) _
+            {
+              return { type: 'COMENTARIO', value: cm.join("") };
+            }
+
 COMMENTS = _ '\\'str:([ a-zA-Z0-9]*)_  { return str.join("");}
+
 ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _
             {
               return { type: 'ID', value: id };
             }
+
 NUMBER   = _ digits:$[0-9]+ _
             {
               return { type: 'NUM', value: parseInt(digits, 10) };
