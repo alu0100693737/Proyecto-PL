@@ -31,16 +31,7 @@ program
   }
 
 block
-  = c:comentario?
-    comentario
-    = COMMENTS* {
-      return {
-        type: 'COMENTARIO',
-        value: value
-        }
-        }
-
-  / cD:constantDeclaration? vD:varDeclaration? fD:functionDeclaration* st:st {
+  = cD:constantDeclaration? vD:varDeclaration? fD:functionDeclaration* cm:comentarios* st:st {
     let constants = cD? cD : [];
     let variables = vD? vD : [];
     return {
@@ -48,9 +39,13 @@ block
       constants: constants,
       variables: variables,
       functions: fD,
+      comentarios: cm,
       main: st
     };
   }
+
+comentarios
+ = COMMENT id:ID?
 
 constantDeclaration
   = CONST id:ID ASSIGN n:NUMBER rest:(COMMA ID ASSIGN NUMBER)* SC {
@@ -225,7 +220,10 @@ VAR      = _ "var" _
 CONST    = _ "const" _
 FUNCTION = _ "function" _
 STRING   = _ str:([a-zA-Z0-9_ ]*)_ { return str.join(""); } /* [h, o, l, a] */
-COMMENTS = _ '\\'str:([ a-zA-Z0-9]*)_  { return type: 'COMENTARIO', value: str.join(""); }
+COMMENT = _ id:$"\\" _ {
+  return { type: 'COMENTARIO', value: id };
+}
+COMMENTS = _ '\\'str:([ a-zA-Z0-9]*)_  { return str.join("");}
 ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _
             {
               return { type: 'ID', value: id };
