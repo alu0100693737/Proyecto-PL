@@ -119,6 +119,14 @@ st
         };
       }
 
+      / i:ID ASSIGN s:string {
+           return {
+             type: '=',
+             left: i,
+             right: s
+           }
+       }
+
   / cond
 
   cond
@@ -160,6 +168,15 @@ st
 
     / LEFTPAR t:assign RIGHTPAR   { return t; }
 
+    /* Asignaciones string del tipo a = "HOLA";  */
+  string
+  = COMILLAS value:STRING COMILLAS {
+    return {
+      type: 'STRING',
+      value: value
+    }
+  }
+
 _ = $[ \t\n\r]*
 COMMENTS = _ op:_"\\" ([a-zA-Z_][a-zA-Z_0-9]*) _ { return "COMMENTS"; }       /* aun no implementado */
 ASSIGN   = _ op:'=' _  { return op; }
@@ -174,7 +191,7 @@ SC       = _";"_
 COMMA    = _","_
 AND      = _"&&"_                           /* aun no implementado */
 OR       = _"||"_                           /* aun no implementado */
-STRING   = _'"'_                            /* aun no implementado */
+COMILLAS   = _'"'_                            /* aun no implementado */
 COMP     = _ op:("=="/"!="/"<="/">="/"<"/">") _ {
                return op;
             }
@@ -190,6 +207,7 @@ RETURN   = _ "return" _
 VAR      = _ "var" _
 CONST    = _ "const" _
 FUNCTION = _ "function" _
+STRING   = _ str:([a-zA-Z0-9_ ]*)_ { return str; }
 ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _
             {
               return { type: 'ID', value: id };
