@@ -45,7 +45,12 @@ block
   }
 
 comentarios
- = cm:COMENTARIO
+ = COMMENT cm:COMENTARIO {
+   return {
+     type: 'COMENTARIO',
+     value: cm.value
+   }
+ }
 
 constantDeclaration
   = CONST id:ID ASSIGN n:NUMBER rest:(COMMA ID ASSIGN NUMBER)* SC {
@@ -223,9 +228,10 @@ CONST    = _ "const" _
 FUNCTION = _ "function" _
 STRING   = _ str:([a-zA-Z0-9_ ]*)_ { return str.join(""); } /* [h, o, l, a] */
 COMMENT = _ id:$"\\" _
-COMENTARIO = _ '\\'cm:([a-zA-Z_0-9]*) _
+COMENTARIO = _ cm:$('\\'[ a-zA-Z_0-9]*) _
             {
-              return { type: 'COMENTARIO', value: cm.join("") };
+              cm = cm.replace('\\', "");
+              return { type: 'COMENTARIO', value: cm };
             }
 
 COMMENTS = _ '\\'str:([ a-zA-Z0-9]*)_  { return str.join("");}
