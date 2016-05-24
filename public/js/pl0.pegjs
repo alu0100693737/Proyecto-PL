@@ -20,94 +20,133 @@
   }
 }
 
-program = b:block { b.name = {type: 'ID', value: "$main"}; b.params = []; return b;}
+program
+  = b:block {
+    b.name = {
+    type: 'ID',
+    value: "$main"
+    };
+    b.params = [];
+    return b;
+  }
 
-block = cD:constantDeclaration? vD:varDeclaration? fD:functionDeclaration* st:st
-          {
-            let constants = cD? cD : [];
-            let variables = vD? vD : [];
-            return {
-              type: 'BLOCK',
-              constants: constants,
-              variables: variables,
-              functions: fD,
-              main: st
-            };
-          }
+block
+  = cD:constantDeclaration? vD:varDeclaration? fD:functionDeclaration* st:st {
+    let constants = cD? cD : [];
+    let variables = vD? vD : [];
+    return {
+      type: 'BLOCK',
+      constants: constants,
+      variables: variables,
+      functions: fD,
+      main: st
+    };
+  }
 
-constantDeclaration = CONST id:ID ASSIGN n:NUMBER rest:(COMMA ID ASSIGN NUMBER)* SC
-                        {
-                          let r = rest.map( ([_, id, __, nu]) => [id.value, nu.value] );
-                          return [[id.value, n.value]].concat(r)
-                        }
+constantDeclaration
+  = CONST id:ID ASSIGN n:NUMBER rest:(COMMA ID ASSIGN NUMBER)* SC {
+    let r = rest.map( ([_, id, __, nu]) => [id.value, nu.value] );
+    return [[id.value, n.value]].concat(r)
+}
 
-varDeclaration = VAR id:ID rest:(COMMA ID)* SC
-                    {
-                      let r = rest.map( ([_, id]) => id.value );
-                      return [id.value].concat(r)
-                    }
+varDeclaration
+  = VAR id:ID rest:(COMMA ID)* SC {
+    let r = rest.map( ([_, id]) => id.value );
+    return [id.value].concat(r)
+}
 
-functionDeclaration = FUNCTION id:ID LEFTPAR !COMMA p1:ID? r:(COMMA ID)* RIGHTPAR SC b:block SC
-      {
-        let params = p1? [p1] : [];
-        params = params.concat(r.map(([_, p]) => p));
-        //delete b.type;
-        return Object.assign({
-          type: 'FUNCTION',
-          name: id,
-          params: params,
-        }, b);
+functionDeclaration = FUNCTION id:ID LEFTPAR !COMMA p1:ID? r:(COMMA ID)* RIGHTPAR SC b:block SC {
+  let params = p1? [p1] : [];
+  params = params.concat(r.map(([_, p]) => p));
+  //delete b.type;
+  return Object.assign({
+    type: 'FUNCTION',
+    name: id,
+    params: params,
+  }, b);
+}
 
+st
+  = CL s1:st? r:(SC st)* SC* CR {
+  //console.log(location()) /* atributos start y end */
+  let t = [];
+  if (s1)
+    t.push(s1);
+    return {
+       type: 'COMPOUND', // Chrome supports destructuring
+       children: t.concat(r.map( ([_, st]) => st ))
+     };
+  }
+
+  / IF e:assign THEN st:st ELSE sf:st {
+      return {
+        type: 'IFELSE',
+        c:  e,
+        st: st,
+        sf: sf,
+      };
+  }
+
+  / IF e:assign THEN st:st {
+      return {
+        type: 'IF',
+        c:  e,
+        st: st
+      };
+  }
+
+  / WHILE a:assign DO st:st {
+      return {
+        type: 'WHILE',
+        c: a,
+        st: st
+      };
+  }
+
+  / RETURN a:assign? {
+      return {
+        type: 'RETURN',
+        children: a? [a] : [] };
+  }
+
+  / assign
+    assign
+      = i:ID ASSIGN e:cond {
+        return {
+          type: '=',
+          left: i,
+          right: e
+        };
       }
 
+  / cond
 
-st     = CL s1:st? r:(SC st)* SC* CR {
-               //console.log(location()) /* atributos start y end */
-               let t = [];
-               if (s1) t.push(s1);
-               return {
-                 type: 'COMPOUND', // Chrome supports destructuring
-                 children: t.concat(r.map( ([_, st]) => st ))
-               };
-            }
-       / IF e:assign THEN st:st ELSE sf:st
-           {
-             return {
-               type: 'IFELSE',
-               c:  e,
-               st: st,
-               sf: sf,
-             };
-           }
-       / IF e:assign THEN st:st
-           {
-             return {
-               type: 'IF',
-               c:  e,
-               st: st
-             };
-           }
-       / WHILE a:assign DO st:st {
-             return { type: 'WHILE', c: a, st: st };
-           }
-       / RETURN a:assign? {
-             return { type: 'RETURN', children: a? [a] : [] };
-           }
-       / assign
+  cond
+      = l:exp op:COMP r:exp {
+        return {
+          type: op,
+          left: l,
+          right: r
+        }
+    }
 
-assign = i:ID ASSIGN e:cond
-            { return {type: '=', left: i, right: e}; }
-       / cond
+  / exp
 
-cond = l:exp op:COMP r:exp { return { type: op, left: l, right: r} }
-     / exp
+  exp    =
+      t:term
+      r:(ADD term)*   {
+        return tree(t,r);
+      }
 
-exp    = t:term   r:(ADD term)*   { return tree(t,r); }
-term   = f:factor r:(MUL factor)* { return tree(f,r); }
+      term   =
+        f:factor r:(MUL factor)* {
+          return tree(f,r);
+        }
 
-factor = NUMBER
-       / f:ID LEFTPAR a:assign? r:(COMMA assign)* RIGHTPAR
-         {
+  factor
+    =  NUMBER
+
+    / f:ID LEFTPAR a:assign? r:(COMMA assign)* RIGHTPAR {
            let t = [];
            if (a) t.push(a);
            return {
@@ -116,28 +155,37 @@ factor = NUMBER
              arguments: t.concat(r.map(([_, exp]) => exp))
            }
          }
-       / ID
-       / LEFTPAR t:assign RIGHTPAR   { return t; }
+
+    / ID
+
+    / LEFTPAR t:assign RIGHTPAR   { return t; }
 
 _ = $[ \t\n\r]*
-
+COMMENTS = _ op:_"\\" ([a-zA-Z_][a-zA-Z_0-9]*) _ { return "COMMENTS"; }       /* aun no implementado */
 ASSIGN   = _ op:'=' _  { return op; }
+INCREMENTO = op:("++"/"--") _ {  return op; }         /* aun no implementado */
 ADD      = _ op:[+-] _ { return op; }
 MUL      = _ op:[*/] _ { return op; }
 LEFTPAR  = _"("_
 RIGHTPAR = _")"_
 CL       = _"{"_
 CR       = _"}"_
-SC       = _";"+_
+SC       = _";"_
 COMMA    = _","_
+AND      = _"&&"_                           /* aun no implementado */
+OR       = _"||"_                           /* aun no implementado */
+STRING   = _'"'_                            /* aun no implementado */
 COMP     = _ op:("=="/"!="/"<="/">="/"<"/">") _ {
                return op;
             }
 IF       = _ "if" _
 THEN     = _ "then" _
 ELSE     = _ "else" _
+FOR      = _ "for" _                        /* aun no implementado */
 WHILE    = _ "while" _
 DO       = _ "do" _
+SWITCH   = _ "switch" _
+CASE     = _ "case" _
 RETURN   = _ "return" _
 VAR      = _ "var" _
 CONST    = _ "const" _
