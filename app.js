@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
 const PEG = require('./public/js/pl0');
+const semantic = require('./public/js/semantic');
 
 const app = express();
 

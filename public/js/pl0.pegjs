@@ -45,7 +45,7 @@ block
   }
 
 comentarios
- = COMMENT cm:COMENTARIO {
+ = COMMENT cm:COMENTARIO? {
    return {
      type: 'COMENTARIO',
      value: cm.value
@@ -190,7 +190,7 @@ st
 
     /* Asignaciones string del tipo a = "HOLA";  */
   string
-  = COMILLAS value:STRING COMILLAS {
+  = COMILLAS value:STRING? COMILLAS {
     return {
       type: 'STRING',
       value: value
@@ -226,15 +226,13 @@ RETURN   = _ "return" _
 VAR      = _ "var" _
 CONST    = _ "const" _
 FUNCTION = _ "function" _
-STRING   = _ str:([a-zA-Z0-9_ ]*)_ { return str.join(""); } /* [h, o, l, a] */
+STRING   = _ str:([a-zA-Z_0-9()!¿?{}&',;:<>_-/\=`]*)_ { return str.join(""); } /* [h, o, l, a] */
 COMMENT = _ id:$"\\" _
-COMENTARIO = _ cm:$('\\'[ a-zA-Z_0-9]*) _
+COMENTARIO = _ cm:$('\\'[a-zA-Z_0-9()!¿?{}&',;:<>"_-/\=`]*) _
             {
               cm = cm.replace('\\', "");
               return { type: 'COMENTARIO', value: cm };
             }
-
-COMMENTS = _ '\\'str:([ a-zA-Z0-9]*)_  { return str.join("");}
 
 ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _
             {

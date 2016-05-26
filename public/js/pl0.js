@@ -245,8 +245,8 @@ module.exports = (function() {
         peg$c91 = function(str) { return str.join(""); },
         peg$c92 = "\\",
         peg$c93 = { type: "literal", value: "\\", description: "\"\\\\\"" },
-        peg$c94 = /^[ a-zA-Z_0-9]/,
-        peg$c95 = { type: "class", value: "[ a-zA-Z_0-9]", description: "[ a-zA-Z_0-9]" },
+        peg$c94 = /^[ a-zA-Z_0-9()!\xBF?{}&',;:<>"]/,
+        peg$c95 = { type: "class", value: "[ a-zA-Z_0-9()!\xBF?{}&',;:<>\"]", description: "[ a-zA-Z_0-9()!\xBF?{}&',;:<>\"]" },
         peg$c96 = function(cm) {
                       cm = cm.replace('\\', "");
                       return { type: 'COMENTARIO', value: cm };
@@ -1416,6 +1416,9 @@ module.exports = (function() {
       s1 = peg$parseCOMILLAS();
       if (s1 !== peg$FAILED) {
         s2 = peg$parseSTRING();
+        if (s2 === peg$FAILED) {
+          s2 = null;
+        }
         if (s2 !== peg$FAILED) {
           s3 = peg$parseCOMILLAS();
           if (s3 !== peg$FAILED) {
