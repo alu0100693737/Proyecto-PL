@@ -1,9 +1,9 @@
 var assert = chai.assert;
-
+const pl0 = require('../js/pl0.js');
 suite('Tests', function(){
 
   test('Asignacion: ', function(){
-    object = pl0.parse("x = 9. ")
+    object = parse("x = 9. ")
     assert.equal(object.block.st.type, "=")
     assert.equal(object.block.st.left.type, "ID")
     assert.equal(object.block.st.left.value, "x")
@@ -12,7 +12,7 @@ suite('Tests', function(){
   });
 
   test('Suma: ', function(){
-    object = pl0.parse("x = 3 + 5 .")
+    object = parse("x = 3 + 5 .")
     assert.equal(object.block.st.right.type, "+")
   });
 
