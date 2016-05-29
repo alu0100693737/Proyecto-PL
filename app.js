@@ -49,7 +49,7 @@ app.get('/arbol', (request, response) => {
     });
 });
 
-const Entrada = require('./models/db');
+//const Entrada = require('./models/db');
 
 //Guardar maximo 4 entradas. Siempre se cambia la ultima
 app.get('/mongo/', function(req, res) {

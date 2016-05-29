@@ -1,1 +1,1 @@
-web: node --harmony-destructuring app.js
+web: node --harmony_destructuring app.js
