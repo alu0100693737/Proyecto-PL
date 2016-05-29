@@ -6,7 +6,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const expressLayouts = require('express-ejs-layouts');
+//const expressLayouts = require('express-ejs-layouts');
 const PEG = require('./public/js/pl0');
 const semantic = require('./public/js/semantic');
 
@@ -15,7 +15,7 @@ app.set('port', (process.env.PORT || 5000));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(expressLayouts);
+//app.use(expressLayouts);
 
 app.use(express.static(__dirname + '/public'));
 
