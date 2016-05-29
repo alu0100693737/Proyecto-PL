@@ -31,21 +31,21 @@ program
   }
 
 block
-  = cD:constantDeclaration? vD:varDeclaration? fD:functionDeclaration* cm:comentarios* st:st {
+  = cm:comentarios* cD:constantDeclaration? vD:varDeclaration? fD:functionDeclaration* st:st {
     let constants = cD? cD : [];
     let variables = vD? vD : [];
     return {
       type: 'BLOCK',
+      comentarios: cm,
       constants: constants,
       variables: variables,
       functions: fD,
-      comentarios: cm,
       main: st
     };
   }
 
 comentarios
- = COMMENT cm:COMENTARIO? {
+ = COMMENT cm:COMENTARIO {
    return {
      type: 'COMENTARIO',
      value: cm.value
@@ -58,15 +58,20 @@ constantDeclaration
     return [[id.value, n.value]].concat(r)
 }
 
-varDeclaration
-  = VAR id:ID rest:(COMMA ID)* SC {
-    let r = rest.map( ([_, id]) => id.value );
-    return [id.value].concat(r)
+//asignacion de valor a las variables
+varDeclaration = VAR id:ID ASSIGN? val1:factor? rest:(COMMA ID ASSIGN? val2:factor?)* SC {
+  let r = rest.map( ([_, id, __, val2]) => [id.value, val2] );
+  return [[id.value, val1]].concat(r)
 }
 
 functionDeclaration = FUNCTION id:ID LEFTPAR !COMMA p1:ID? r:(COMMA ID)* RIGHTPAR SC b:block SC {
   let params = p1? [p1] : [];
-  params = params.concat(r.map(([_, p]) => p));
+  if(param1) /* Si existe el primer parámetro */
+      params = params.concat(rest.map(([_, p]) => p)); /* Concatenamos con el primer parámetro anterior el resto, si los hubiese (ignoramos comas) */
+    let ret = undefined; /* Contemplamos la posibilidad de que no exista el return */
+    let i = b.main.length - 1; /* Almacenamos la posición del último elemento, que se debería corresponder con el return si existe */
+    if(b.main[i].type = 'RETURN'); /* Si existe el return */
+      ret = b.main[i].children;
   //delete b.type;
   return Object.assign({
     type: 'FUNCTION',
@@ -199,7 +204,6 @@ st
 
 _ = $[ \t\n\r]*
 ASSIGN   = _ op:'=' _  { return op; }
-INCREMENTO = op:("++"/"--") _ {  return op; }         /* aun no implementado */
 ADD      = _ op:[+-] _ { return op; }
 MUL      = _ op:[*/] _ { return op; }
 LEFTPAR  = _"("_
@@ -208,8 +212,6 @@ CL       = _"{"_
 CR       = _"}"_
 SC       = _";"_
 COMMA    = _","_
-AND      = _"&&"_                           /* aun no implementado */
-OR       = _"||"_                           /* aun no implementado */
 COMILLAS   = _'"'_
 COMP     = _ op:("=="/"!="/"<="/">="/"<"/">") _ {
                return op;
@@ -226,9 +228,9 @@ RETURN   = _ "return" _
 VAR      = _ "var" _
 CONST    = _ "const" _
 FUNCTION = _ "function" _
-STRING   = _ str:([a-zA-Z_0-9()!¿?{}&',;:<>_-/\=`]*)_ { return str.join(""); } /* [h, o, l, a] */
+STRING   = _ str:([ a-zA-Z_0-9!¿?{}&',;:<>/=`]*)_ { return str.join(""); }
 COMMENT = _ id:$"\\" _
-COMENTARIO = _ cm:$('\\'[a-zA-Z_0-9()!¿?{}&',;:<>"_-/\=`]*) _
+COMENTARIO = _ cm:$('\\'[ a-zA-Z_0-9!¿?{}&',;:<>/=`]*) _
             {
               cm = cm.replace('\\', "");
               return { type: 'COMENTARIO', value: cm };

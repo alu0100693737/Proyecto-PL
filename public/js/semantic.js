@@ -1,8 +1,6 @@
 (() => {
     "use strict";
-
       const semantic = (tree) => {
-
         eachBlockPre(tree, (t, args) => {
             t.symbolTable = {
               name : t.name.value,

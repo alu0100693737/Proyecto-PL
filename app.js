@@ -1,6 +1,7 @@
 "use strict";
 const express = require('express');
 const path = require('path');
+const util = require('util');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -10,7 +11,6 @@ const PEG = require('./public/js/pl0');
 const semantic = require('./public/js/semantic');
 
 const app = express();
-
 app.set('port', (process.env.PORT || 5000));
 
 app.set('views', path.join(__dirname, 'views'));
@@ -27,12 +27,19 @@ app.get('/grammar', (request, response) => {
   response.render('grammar', { title: 'Proyecto' });
 });
 
+app.get('/test', (request, response) => {
+  response.render('test', { title: 'Proyecto' });
+});
+
 app.get('/arbol', (request, response) => {
     var tree;
     try {
         tree = PEG.parse(request.query.input);
         if (tree.errors)
             tree = tree.errors;
+
+        semantic(tree);
+        console.log(util.inspect(tree, {depth: null}));
     } catch (e) {
         console.log("ERROR: " + e);
         tree = "Syntax Error: " + e.message.substring(0, e.message.length - 1) + " in line " + e.location.start.line;
