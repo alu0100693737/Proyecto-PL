@@ -22,10 +22,6 @@ gulp.task('clean', function(cb) {
   del(['minified/*'], cb);
 });
 
-npm install shell
-gulp.task('test', shell.task([
-    'mocha --harmony-destructuring public/test/test.js'
-]));/*
 gulp.task('test', function() {
   // Be sure to return the stream
   return gulp.src([])
@@ -37,7 +33,7 @@ gulp.task('test', function() {
       // Make sure failed tests cause gulp to exit non-zero
       throw err;
     });
-});*/
+});
 
 gulp.task('deploy', function() {
   return gulp.src('./minified/**/*')
