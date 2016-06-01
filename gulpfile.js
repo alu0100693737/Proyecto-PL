@@ -6,6 +6,7 @@ var del = require('del');
 var karma = require('gulp-karma');
 var minifyHTML = require('gulp-minify-html');
 var minifyCSS = require('gulp-minify-css');
+var shell = require('gulp-shell');
 
 gulp.task('minify', function () {
   gulp.src('./public/js/*')
@@ -21,6 +22,10 @@ gulp.task('clean', function(cb) {
   del(['minified/*'], cb);
 });
 
+
+gulp.task('tests', shell.task([
+    'mocha --harmony-destructuring public/test/test.js'
+]));/*
 gulp.task('test', function() {
   // Be sure to return the stream
   return gulp.src([])
@@ -32,8 +37,8 @@ gulp.task('test', function() {
       // Make sure failed tests cause gulp to exit non-zero
       throw err;
     });
-});
-  
+});*/
+
 gulp.task('deploy', function() {
   return gulp.src('./minified/**/*')
     .pipe(ghPages());

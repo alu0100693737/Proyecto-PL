@@ -33,7 +33,7 @@
     "express-ejs-layouts": "^1.1.0"
   },
   "devDependencies": {
-     "blanket": "^1.2.3",
+    "blanket": "^1.2.3",
     "chai": "^2.3.0",
     "del": "^2.2.0",
     "express": "^4.13.4",
@@ -57,6 +57,7 @@
     "mocha": "^2.2.1",
     "morgan": "^1.6.1",
     "negotiator": "^0.6.1",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "shell": "^0.3.2"
   }
 }
