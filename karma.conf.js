@@ -8,7 +8,7 @@ module.exports = function(config) {
     basePath: '',
 
 
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'chai'],
 
     client: {
          mocha: {
@@ -23,14 +23,13 @@ module.exports = function(config) {
       'public/test/chai.js',
       'public/test/sinon-1.7.1.js',
       'public/test/pl0tests.js',
-      'public/test/mocha.css',
       'public/test/test.js'
     ],
 
 
     // list of files to exclude
     exclude: [
-      
+
     ],
 
 
@@ -65,7 +64,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['PhantomJS', 'Chrome'],
 
 
     // Continuous Integration mode
