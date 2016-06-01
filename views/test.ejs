@@ -3,10 +3,13 @@
   <link href="../test/global.css" rel="stylesheet" type="text/css">
   <link href="../test/mocha.css" rel="stylesheet" type="text/css">
   <script src="../test/pl0tests.js"></script>
-  <div id="salida">
+
   <script src="../test/chai.js"></script>
   <script src="../test/mocha.js"></script>
-  <script>mocha.setup('tdd')</script>
-  <script src="../test/test.js"></script>
+
+  <script src="blanket.js"
+	    data-cover-adapter="mocha-blanket.js"></script>
+  <script src="../test/test.js" data-cover></script>
+  <script>mocha.setup('bdd')</script>
+	<script>mocha.setup('tdd')</script>
   <script>mocha.run();</script>
-</div>

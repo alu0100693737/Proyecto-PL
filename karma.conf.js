@@ -8,18 +8,29 @@ module.exports = function(config) {
     basePath: '',
 
 
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha'],
+
+    client: {
+         mocha: {
+           ui: 'tdd'
+         }
+   },
 
 
     // list of files / patterns to load in the browser
     files: [
+      'public/test/mocha.js',
+      'public/test/chai.js',
+      'public/test/sinon-1.7.1.js',
+      'public/test/pl0tests.js',
+      'public/test/mocha.css',
+      'public/test/test.js'
     ],
 
 
     // list of files to exclude
     exclude: [
+      'gulpfile.js'
     ],
 
 

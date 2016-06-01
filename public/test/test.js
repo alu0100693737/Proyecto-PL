@@ -1,6 +1,6 @@
 var assert = chai.assert;
 
-suite('Tests', function(){
+suite('Tests Gramatica', function(){
 
 test('Variables sin definir: ', function(){
     object = pl0.parse("var a, b, c; {}");
@@ -131,9 +131,47 @@ test('Variables sin definir: ', function(){
     assert.equal(object.variables[0][0], "a");
     assert.equal(object.variables[0][1].type, "NUM");
     assert.equal(object.variables[0][1].value, "4");
+    assert.equal(object.variables[1][0], "n");
+    assert.equal(object.variables[2][0], "b");
 
-    console.log(object);
+    assert.equal(object.main.type, "COMPOUND");
+    assert.equal(object.main.children[0].type, "FOR");
+    assert.equal(object.main.children[0].cond, "<");
+    assert.equal(object.main.children[0].increment.left.type, "ID");
+    assert.equal(object.main.children[0].increment.left.value, "i");
+    assert.equal(object.main.children[0].increment.right.type, "NUM");
+    assert.equal(object.main.children[0].increment.right.value, "1");
+    assert.equal(object.main.children[0].increment.type, "+");
 
+    assert.equal(object.main.children[1].type, "IF");
+    assert.equal(object.main.children[1].c.left.type, "ID");
+    assert.equal(object.main.children[1].c.left.value, "n");
+    assert.equal(object.main.children[1].c.right.type, "NUM");
+    assert.equal(object.main.children[1].c.right.value, "0");
+    assert.equal(object.main.children[1].c.type, ">");
+
+    assert.equal(object.main.children[1].st.type, "=");
+    assert.equal(object.main.children[1].st.left.type, "ID");
+    assert.equal(object.main.children[1].st.left.value, "b");
+    assert.equal(object.main.children[1].st.right.type, "STRING");
+    assert.equal(object.main.children[1].st.right.value, "Numero mayor que cero");
+
+    assert.equal(object.main.children[2].type, "IF");
+    assert.equal(object.main.children[2].c.type, "==");
+    assert.equal(object.main.children[2].c.left.type, "ID");
+    assert.equal(object.main.children[2].c.left.value, "n");
+    assert.equal(object.main.children[2].c.right.type, "NUM");
+    assert.equal(object.main.children[2].c.right.value, "0");
+
+    assert.equal(object.main.children[2].st.type, "=");
+    assert.equal(object.main.children[2].st.left.type, "ID");
+    assert.equal(object.main.children[2].st.left.value, "b");
+    assert.equal(object.main.children[2].st.right.type, "STRING");
+    assert.equal(object.main.children[2].st.right.value, "Numero mayor que cero");
+
+    assert.equal(object.main.children[3].type, "RETURN");
+    assert.equal(object.main.children[3].children[0].type, "ID");
+    assert.equal(object.main.children[3].children[0].value, "b");
   });
 
 
