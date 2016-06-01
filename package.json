@@ -55,6 +55,7 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "mocha": "^2.2.1",
     "morgan": "^1.6.1",
+    "negotiator": "^0.6.1",
     "serve-favicon": "^2.3.0"
   }
 }
