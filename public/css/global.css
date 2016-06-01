@@ -30,8 +30,7 @@ button.hidden {
 
 a {
   color: #E4E4E4;
-  border-style: solid;
-  border-color: black;
+
 }
 a:hover {
   color: black;
@@ -95,7 +94,7 @@ label {
   font-size: 25px;
   padding-left: 5%; }
 
-footer {
+#footer {
   border-color: rgba(23, 86, 202, 0.3);
   padding: 1%;
   font-weight: bold;
