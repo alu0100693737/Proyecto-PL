@@ -13,6 +13,11 @@ table {
   background-color: rgba(242, 247, 82, 0.4);
 }
 
+/*problemas mostrando boton*/  
+button.hidden {
+  display: none;
+}
+
 #prueba {
   background-color: rgba(242, 247, 82, 0.4);
   padding: 5px;
