@@ -6,8 +6,6 @@ before_script:
   - export DISPLAY=:99.0
   - export CHROME_BIN=chromium-browser
   - npm install -g gulp
-   - npm install phantomjs
-  - npm install -g karma
   - sh -e /etc/init.d/xvfb start
 script: gulp
 branches:
