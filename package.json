@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "chai": "^2.3.0",
+    "gulp": "^3.9.1",
     "gulp-minify": "0.0.5",
     "gulp-minify-css": "^1.0.0",
     "gulp-minify-html": "^1.0.1",
