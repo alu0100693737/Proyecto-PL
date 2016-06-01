@@ -1,12 +1,17 @@
 language: node_js
 node_js:
   - "5"
+  - "5.1"
+  - "4"
+  - "4.2"
+  - "4.1"
+  - "4.0"
+  - "0.12"
 
 before_script:
   - export DISPLAY=:99.0
-  - export CHROME_BIN=chromium-browser
-  - npm install -g gulp
   - sh -e /etc/init.d/xvfb start
+    - npm install -g gulp
 script: gulp
 branches:
   only:

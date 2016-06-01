@@ -21,6 +21,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'public/test/mocha.js',
+      'public/test/chai.js',
       'public/test/pl0tests.js',
       'public/test/test.js'
 
@@ -57,13 +59,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Firefox', 'TravisCIChrome'],
-    customLaunchers: {
-      TravisCIChrome: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    },
+    browsers: ['Chrome', 'PhantomJS'],
 
    // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 60000,
@@ -72,8 +68,6 @@ module.exports = function(config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false,
 
-  });
-  if (process.env.TRAVIS) {
-    config.browsers = ['PhantomJS', 'Firefox', 'chromeTravisCI'];
-  }
-};
+  })
+
+}
