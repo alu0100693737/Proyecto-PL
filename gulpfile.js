@@ -22,8 +22,8 @@ gulp.task('clean', function(cb) {
   del(['minified/*'], cb);
 });
 
-
-gulp.task('tests', shell.task([
+npm install shell
+gulp.task('test', shell.task([
     'mocha --harmony-destructuring public/test/test.js'
 ]));/*
 gulp.task('test', function() {
