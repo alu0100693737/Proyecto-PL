@@ -9,20 +9,42 @@ textarea {
 table {
   font-size: 10px;
   font-size: 1rem;
-  border-color: #eee; }
+  border-color: #eee;
+  background-color: rgba(242, 247, 82, 0.4);
+}
+
+#prueba {
+  background-color: rgba(242, 247, 82, 0.4);
+  padding: 5px;
+}
 
 #finaltable td {
   background-color: #BDBDBD;
   padding: 20px;
   border: 20px; }
 
+a {
+  color: #E4E4E4;
+  border-style: solid;
+  border-color: black;
+}
+a:hover {
+  color: black;
+
+}
+
 nav {
-  font-weight: bold; }
+  font-weight: bold;
+background: rgba(153, 153, 0, 0.3);}
+  nav:hover {
+    background-color: white;
+
+  }
   nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    background: #DA9797;
+    background-color: rgba(255, 233, 146, 0.4);
     overflow: hidden; }
   nav li {
     float: left; }
@@ -38,22 +60,24 @@ button.hidden {
   display: none; }
 
 tr:nth-child(odd) {
-  background-color: rgba(215, 143, 44, 0.6); }
+   }
 
 tr:nth-child(even) {
-  background-color: rgba(0, 164, 42, 0.8); }
+   }
 
 tr.error {
   background-color: red; }
 
 html {
-  background: url("images/fondo.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+ height:100%;
   font-weight: bold; }
 
+body {
+  background: url("images/fondo.jpg") no-repeat center center fixed;
+  background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+}
 #index {
   position: absolute;
   top: 10%;
@@ -70,7 +94,8 @@ footer {
   border-color: rgba(23, 86, 202, 0.3);
   padding: 1%;
   font-weight: bold;
-  font-style: oblique; }
+  font-style: oblique;
+background-color: rgba(242, 247, 82, 0.4);}
 
 #salida {
   background-color: #eee;
@@ -78,7 +103,7 @@ footer {
   padding: 2%; }
 
 #fondo_tabla {
-  background-color: rgba(23, 86, 202, 0.3);
+  background-color: rgba(242, 247, 82, 0.4);
   padding: 5%;
   font-weight: bold;
   font-style: oblique;
@@ -119,7 +144,7 @@ textarea {
   margin-left: 20%;
   margin-top: 5%;
   margin-right: 25%;
-  background-color: rgba(255, 255, 255, 0.4); }
+  background-color: rgba(242, 247, 82, 0.4); }
 
 h1 {
   font-size: 20px;
@@ -131,6 +156,6 @@ h1 {
   background-color: #eee; }
 
 h1:hover {
-  background-color: #DA9797; }
+  background-color: rgba(242, 247, 82, 0.4); }
 
 /*# sourceMappingURL=global.css.map */

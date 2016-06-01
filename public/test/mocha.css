@@ -16,7 +16,7 @@
 
 #mocha h1,
 #mocha h2 {
-  background-color: rgba(255, 255, 238, 0.5);
+  background-color: rgba(255, 255, 238, 0.8);
   margin: 0;
 }
 
@@ -114,7 +114,7 @@
 }
 
 #mocha .test.fail pre {
-  background-color: rgba(255, 255, 238, 0.5);
+  background-color: rgba(255, 255, 238, 0.8);
   color: black;
 }
 
@@ -128,7 +128,7 @@
 }
 
 #mocha .test pre.error {
-  background-color: rgba(255, 255, 238, 0.5);
+  background-color: rgba(255, 255, 238, 0.8);
   color: #c00;
   max-height: 300px;
   overflow: auto;
@@ -140,7 +140,7 @@
  *      ^^ seriously
  */
 #mocha .test pre {
-  background-color: rgba(255, 255, 238, 0.5);
+  background-color: rgba(255, 255, 238, 0.8);
   display: block;
   float: left;
   clear: left;
@@ -219,7 +219,7 @@
   font-size: 18px;
   margin: 0;
   z-index: 1;
-  background-color: rgba(255, 255, 238, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 #mocha-stats .progress {
