@@ -33,7 +33,7 @@ gulp.task('test', function() {
       throw err;
     });
 });
-
+  
 gulp.task('deploy', function() {
   return gulp.src('./minified/**/*')
     .pipe(ghPages());
