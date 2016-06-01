@@ -22,8 +22,6 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'public/test/pl0tests.js',
-      'public/test/mocha.js',
-
       'public/test/test.js'
 
     ],
