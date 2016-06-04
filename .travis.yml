@@ -5,6 +5,7 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - npm install -g gulp
+  - chmod 0777 ./node_modules/.bin/mocha
 script: gulp
 sudo: required
 branches:
