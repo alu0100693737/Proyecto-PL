@@ -1,6 +1,15 @@
-nguage: node_js
-node_js:
-  - "5"
+language: node_js
+  node_js:
+    - "5"
+
+  before_script:
+    - export DISPLAY=:99.0
+   - export CHROME_BIN=chromium-browser
+  - npm install -g gulp
+    - sh -e /etc/init.d/xvfb start
+
+  script: gulp
+  
 branches:
   only:
     - master
