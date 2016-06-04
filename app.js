@@ -10,9 +10,9 @@ const bodyParser = require('body-parser');
 const PEG = require('./public/js/pl0');
 const semantic = require('./public/js/semantic');
 
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/basededatos')
+//mongoose.connect('mongodb://localhost/basededatos')
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -53,8 +53,8 @@ app.get('/arbol', (request, response) => {
     });
 });
 
-const Entrada = require('./models/db');
-
+//const Entrada = require('./models/db');
+/*
 //Guardar maximo 4 entradas. Siempre se cambia la ultima
 app.get('/mongo/', function(req, res) {
     Entrada.find({}, function(err, docs) {
@@ -93,7 +93,7 @@ app.get('/findPorNombre', function(req, res) {
     }, function(err, docs) {
         res.send(docs);
     });
-});
+});*/
 
 app.listen(app.get('port'), () => {
     console.log(`Node app is running at localhost: ${app.get('port')}` );

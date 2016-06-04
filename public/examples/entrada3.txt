@@ -1,0 +1,18 @@
+\\ Ejemplo PL0 con PEGJS
+const A = 4,
+       B = 30, params1 = 40;
+
+var a, b, c;
+{
+   b = "Esto es un String literal";
+   c = "Podemos utilizar estos simbolos azAZ09!¿?{}&',;:<>/=";
+   for(i = 0; i < 10; i+1) {
+		a= param1 + 3;
+	};
+  while (a<4) do {
+    a = init();
+    b = fact(4);
+    c = chuchu(a*b, fact(3))
+  };
+  return c;;;
+}
