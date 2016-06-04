@@ -22,7 +22,7 @@ gulp.task('clean', function(cb) {
   del(['minified/*'], cb);
 });
 
-gulp.task('test', function() {
+gulp.task('karma', function() {
   // Be sure to return the stream
   return gulp.src([])
     .pipe(karma({
@@ -34,6 +34,10 @@ gulp.task('test', function() {
       throw err;
     });
 });
+
+gulp.task('test', shell.task([
+    'mocha --harmony-destructuring public/test/testkarmabdd.js'
+]));
 
 gulp.task('deploy', function() {
   return gulp.src('./minified/**/*')

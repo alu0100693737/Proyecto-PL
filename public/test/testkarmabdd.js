@@ -117,6 +117,56 @@ const PEG = require("../js/pl0.js");
       expect(object.main.children[1].children.children[0].right.right.type).to.be.equal("NUM");
       expect(object.main.children[1].children.children[0].right.right.value).to.be.equal(3);
     });
+    it("If then String Literal", function() {
+      var object = PEG.parse('var a = 4, n, b;{ for(i = 0; i < 5; i+1) {		n = n * 5;	}; if(n > 0) then  b = "Numero mayor que cero"; if(n == 0) then  b = "Numero mayor que cero";  return b; }');
+      expect(object.variables[0][0]).to.be.equal("a");
+      expect(object.variables[0][1].type).to.be.equal("NUM");
+      expect(object.variables[0][1].value).to.be.equal(4);
+      expect(object.variables[1][0]).to.be.equal("n");
+      expect(object.variables[2][0]).to.be.equal("b");
+
+
+      expect(object.main.type).to.be.equal("COMPOUND");
+
+      expect(object.main.children[0].type).to.be.equal("FOR");
+      expect(object.main.children[0].cond).to.be.equal("<");
+      expect(object.main.children[0].increment.left.type).to.be.equal("ID");
+      expect(object.main.children[0].increment.left.value).to.be.equal("i");
+      expect(object.main.children[0].increment.right.type).to.be.equal("NUM");
+      expect(object.main.children[0].increment.right.value).to.be.equal(1);
+      expect(object.main.children[0].increment.type).to.be.equal("+");
+
+      expect(object.main.children[1].type).to.be.equal("IF");
+      expect(object.main.children[1].c.left.type).to.be.equal("ID");
+      expect(object.main.children[1].c.left.value).to.be.equal("n");
+      expect(object.main.children[1].c.right.type).to.be.equal("NUM");
+      expect(object.main.children[1].c.right.value).to.be.equal(0);
+      expect(object.main.children[1].c.type).to.be.equal(">");
+
+      expect(object.main.children[1].st.type).to.be.equal("=");
+      expect(object.main.children[1].st.left.type).to.be.equal("ID");
+      expect(object.main.children[1].st.left.value).to.be.equal("b");
+      expect(object.main.children[1].st.right.type).to.be.equal("STRING");
+      expect(object.main.children[1].st.right.value).to.be.equal("Numero mayor que cero");
+
+      expect(object.main.children[2].type).to.be.equal("IF");
+      expect(object.main.children[2].c.type).to.be.equal("==");
+      expect(object.main.children[2].c.left.type).to.be.equal("ID");
+      expect(object.main.children[2].c.left.value).to.be.equal("n");
+      expect(object.main.children[2].c.right.type).to.be.equal("NUM");
+      expect(object.main.children[2].c.right.value).to.be.equal(0);
+
+      expect(object.main.children[2].st.type).to.be.equal("=");
+      expect(object.main.children[2].st.left.type).to.be.equal("ID");
+      expect(object.main.children[2].st.left.value).to.be.equal("b");
+      expect(object.main.children[2].st.right.type).to.be.equal("STRING");
+      expect(object.main.children[2].st.right.value).to.be.equal("Numero mayor que cero");
+
+      expect(object.main.children[3].children[0].type).to.be.equal("ID");
+      expect(object.main.children[3].children[0].value).to.be.equal("b");
+      expect(object.main.children[3].type).to.be.equal("RETURN");
+    });
+
 
 
 });
