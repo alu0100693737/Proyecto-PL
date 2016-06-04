@@ -44,10 +44,6 @@ gulp.task('deploy', function() {
     .pipe(ghPages());
 });
 
-gulp.task('default', function() {
-  gulp.src([])
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'watch'
-    }));
+  gulp.task('default', ['test'], function() {
+
 });

@@ -2,8 +2,8 @@
   "name": "pegjscalc",
   "version": "0.0.0",
   "scripts": {
-    "start": "node --harmony-destructuring app.js",
-    "test": "gulp test"
+    "test": "gulp test",
+    "start": "node --harmony-destructuring app.js"
   },
   "repository": {
     "type": "git",
