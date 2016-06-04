@@ -66,11 +66,11 @@ varDeclaration = VAR id:ID ASSIGN? val1:factor? rest:(COMMA ID ASSIGN? val2:fact
 
 functionDeclaration = FUNCTION id:ID LEFTPAR !COMMA p1:ID? r:(COMMA ID)* RIGHTPAR SC b:block SC {
   let params = p1? [p1] : [];
-  if(param1) /* Si existe el primer parámetro */
-      params = params.concat(rest.map(([_, p]) => p)); /* Concatenamos con el primer parámetro anterior el resto, si los hubiese (ignoramos comas) */
-    let ret = undefined; /* Contemplamos la posibilidad de que no exista el return */
-    let i = b.main.length - 1; /* Almacenamos la posición del último elemento, que se debería corresponder con el return si existe */
-    if(b.main[i].type = 'RETURN'); /* Si existe el return */
+  if(param1) 
+      params = params.concat(rest.map(([_, p]) => p)); 
+    let ret = undefined; 
+    let i = b.main.length - 1; 
+    if(b.main[i].type = 'RETURN'); 
       ret = b.main[i].children;
   //delete b.type;
   return Object.assign({

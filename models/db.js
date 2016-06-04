@@ -32,7 +32,7 @@ var a, b, c;
     });
     let input2 = new Input({
         "name": "entrada2.pl0",
-        "content": `\\ Ejemplo PL0 con PEGJS
+        "content": `\\\\ Ejemplo PL0 con PEGJS
 const A = 4,
        B = 30, params1 = 40;
 
