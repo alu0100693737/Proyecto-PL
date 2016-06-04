@@ -1,59 +1,113 @@
 (function() {
-  "use strict";
-  const util = require('util');
-  const mongoose = require('mongoose');
+    "use strict";
+    const util = require('util');
+    const mongoose = require('mongoose');
 
-  const EntradaSchema =  //Introducimos el esquema csv
-     mongoose.Schema({
-        "name": { type: String, unique: true },
+    /*Creamos el esquema de nuestra colección*/
+    const InputSchema = mongoose.Schema({
+        "name": {
+            type: String,
+            unique: true
+        },
         "content": String
     });
 
-  const Entrada = mongoose.model("Entrada", EntradaSchema);
+    /*Creamos el modelo de datos Input a partir del esquema ya creado*/
+    const Input = mongoose.model("Input", InputSchema);
 
-  /*let entrada1 = new Entrada({"rank":"ace", "suit":"spades ♠",   "chuchu": [{a: "hello", b: "world!"}]});
-  let entrada2 = new Entrada({"rank":"2",   "suit":"hearts ♥",   "chuchu": [{a: "hola", b: "mundo"}]});
-  let entrada3 = new Entrada({"rank":"3",   "suit":"clubs ♣",    "chuchu": [{a: "hola", b: "mundo"}]});
-  let c4 = new Entrada({"rank":"4",   "suit":"diamonds ♦", "chuchu": [{a: "hola", b: "mundo"}]});*/
- let entrada1 = new Entrada({
-        "name": "entrada1.csv",
-        "content": `"producto",           "precio"
-                    "camisa",             "4,3"
-                    "libro de O\"Reilly", "7,2"`
+    /*Creamos los tres ejemplos iniciales*/
+    let input1 = new Input({
+        "name": "entrada1.pl0",
+        "content": `const A = 4,
+      B = 30;
+var a, b, c;
+{
+  while (a<4) do {
+    a = init();
+    b = fact(4);
+    c = chuchu(a*b, fact(3))
+  };
+  return c;;;
+}`
     });
-    let entrada2 = new Entrada({
-        "name": "entrada2.csv",
-        "content": `"producto",           "precio"  "fecha"
-                    "camisa",             "4,3",    "14/01"
-                    "libro de O\"Reilly", "7,2"     "13/02"`
+    let input2 = new Input({
+        "name": "entrada2.pl0",
+        "content": `\\ Ejemplo PL0 con PEGJS
+const A = 4,
+       B = 30, params1 = 40;
+
+var a, b, c;
+{
+   b = "Esto es un String literal";
+   c = "Podemos utilizar estos simbolos azAZ09!¿?{}&',;:<>/=";
+   for(i = 0; i < 10; i+1) {
+		a= param1 + 3;
+	};
+  while (a<4) do {
+    a = init();
+    b = fact(4);
+    c = chuchu(a*b, fact(3))
+  };
+  return c;;;
+}
+`
     });
-    let entrada3 = new Entrada({
-        "name": "entrada3.csv",
-        "content": `"edad",  "sueldo",  "peso"
-                    ,         "6000€",  "90Kg"
-                    47,       "3000€",  "100Kg"`
+    let input3 = new Input({
+        "name": "entrada3.pl0",
+        "content": `\\Ejemplo Sencillo
+var a = 4, n, b;
+{
+while(a >= 0) do {
+  n =  n + 1;
+  a = a - 1;
+ };
+
+ for(i = 0; i < 5; i+1) {
+		n = n * 5;
+	};
+
+ if(n > 0) then  b = "Numero mayor que cero";
+ if(n == 0) then  b = "Numero mayor que cero";
+
+   return b;
+}
+`
 
     });
 
-  let promesa1 = entrada1.save(function (err) {
-    if (err) { console.log(`Hubieron errores:\n${err}`); return err; }
-    console.log(`Saved: ${entrada1}`);
-  });
+    /*Añadimos los ejemplos a la BD*/
+    let promise1 = input1.save(function(err) {
+        if (err) {
+            console.log(`Hubieron errores:\n${err}`);
+            return err;
+        }
+        console.log(`Guardado: ${input1}`);
+    });
 
-  let promesa2 = entrada2.save(function (err) {
-    if (err) { console.log(`Hubieron errores:\n${err}`); return err; }
-    console.log(`Saved: ${entrada2}`);
-  });
+    let promise2 = input2.save(function(err) {
+        if (err) {
+            console.log(`Hubieron errores:\n${err}`);
+            return err;
+        }
+        console.log(`Guardado: ${input2}`);
+    });
 
-  let promesa3 = Entrada.create(entrada3, function (err, x) {
-    if (err) { console.log(`Hubieron errores:\n${err}`); return err; }
-    console.log(`Saved promesa3: ${x}`);
-  });
+    let promise3 = input3.save(function(err) {
+        if (err) {
+            console.log(`Hubieron errores:\n${err}`);
+            return err;
+        }
+        console.log(`Guardado: ${input3}`);
+    });
 
-  Promise.all([promesa1, promesa2, promesa3]).then( (value) => {
-    console.log(util.inspect(value, {depth: null}));
-    mongoose.connection.close();
-  });
+    /*Esperamos a que se creen los ejemplos*/
+    Promise.all([promise1, promise2, promise3]).then((value) => {
+        console.log("Se han creado las entradas:\n" + util.inspect(value, {
+            depth: null
+        }));
+    }, (reason) => {
+        console.log("No se han podido crear las entradas:\n" + reason);
+    });
 
-  module.exports = Entrada;
+    module.exports = Input;
 })();
