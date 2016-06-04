@@ -65,11 +65,42 @@ $(document).ready(() => {
                'json'
            );
        });
+       
+        //rellenamos el textarea original con el contenido del boton
+      $('button.example').each( (_,y) => {
+        $(y).click( () => { 
+                $.get("/findPorNombre", {
+                        name: $(y).text()
+                    },
+                    (data) => {
+                        $("#original").val(data[0].content);
+                    });
+            });
+       //dump(`examples/${$(y).text()}.txt`); });
+        });
 
-   /* botones para rellenar el textarea */
+        $.get("/find", {}, (data) => {
+            for (var i = 0; i < 4; i++) {
+                if (data[i]) {
+                    $('button.example').get(i).className = "example";
+                    $('button.example').get(i).textContent = data[i].name;
+                }
+            }
+        });
+
+       
+       $("#guardar").click(() => {
+          if (window.localStorage) localStorage.original = original.value;
+          $.get("/mongo/", {
+            name: $("#titulo").val(),
+            content: $("#original").val()
+          });
+        });
+
+   /* botones para rellenar el textarea 
    $('button.example').each( (_,y) => {
      $(y).click( () => { dump(`examples/${$(y).text()}.txt`); });
-   });
+   });*/
 
     // Setup the drag and drop listeners.
     //var dropZone = document.getElementsByClassName('drop_zone')[0];

@@ -10,6 +10,10 @@ const bodyParser = require('body-parser');
 const PEG = require('./public/js/pl0');
 const semantic = require('./public/js/semantic');
 
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/basededatos')
+
 const app = express();
 app.set('port', (process.env.PORT || 5000));
 
@@ -49,7 +53,7 @@ app.get('/arbol', (request, response) => {
     });
 });
 
-//const Entrada = require('./models/db');
+const Entrada = require('./models/db');
 
 //Guardar maximo 4 entradas. Siempre se cambia la ultima
 app.get('/mongo/', function(req, res) {
