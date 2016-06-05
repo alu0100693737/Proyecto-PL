@@ -65,18 +65,19 @@ $(document).ready(() => {
                'json'
            );
        });
-       
+
         //rellenamos el textarea original con el contenido del boton
       $('button.example').each( (_,y) => {
-        $(y).click( () => { 
-                $.get("/findPorNombre", {
+        $(y).click( () => {
+              /*  $.get("/findPorNombre", {
                         name: $(y).text()
                     },
                     (data) => {
                         $("#original").val(data[0].content);
                     });
             });
-       //dump(`examples/${$(y).text()}.txt`); });
+       */dump(`examples/${$(y).text()}.txt`);
+       });
         });
 
         $.get("/find", {}, (data) => {
@@ -88,7 +89,7 @@ $(document).ready(() => {
             }
         });
 
-       
+
        $("#guardar").click(() => {
           if (window.localStorage) localStorage.original = original.value;
           $.get("/mongo/", {
@@ -97,7 +98,7 @@ $(document).ready(() => {
           });
         });
 
-   /* botones para rellenar el textarea 
+   /* botones para rellenar el textarea
    $('button.example').each( (_,y) => {
      $(y).click( () => { dump(`examples/${$(y).text()}.txt`); });
    });*/
